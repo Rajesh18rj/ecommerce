@@ -128,4 +128,89 @@ now if i clicked new button in admin panel , there is no form there , lets creat
 
             if i clicked that three doted .. there is edit , delete and view           
 
+# 3 
+
+In this Episode we are working on CategoryResource and BrandResource
+
+
+php artisan make:filament-resource Customer --generate
+
+    Automatically generating forms and tables (if you use --generate flag)
+
+        If you'd like to save time, Filament can automatically generate the form and table for you, based on your model's database columns, using --generate:
+ipo namma admin panel ah open panni, category ah pathom na , Namma table la kudutha ella field um automatic ah anga generate agi irukum.. 
+
+but namma itha(form-ah) use nanna porathilla, itha modify panni than use panna porom.. 
+
+Go-to CategoryResourse
+
+ public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Section::make([
+                    Grid::make()
+                        ->schema([
+                            TextInput::make('name')
+                                ->required()
+                                ->maxLength(255)
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(fn (string $operation, $state, Set $set ) => $operation ===
+                                'create' ? $set('slug', Str::slug($state)) : null),
+                                // Why we giving these last two line coz, if someone type name , it automatically generates slug
+
+                            TextInput::make('slug')
+                                ->maxLength(255)
+                                ->disabled()
+                                ->required()
+                                ->dehydrated()
+                                ->unique(Category::class, 'slug', ignoreRecord: true)
+
+                        ]),
+
+                        FileUpload::make('image')
+                            ->image()
+                            ->directory('categories'),
+
+                        Toggle::make('is_active')
+                            ->required()
+                            ->default(true)
+
+
+                    ])
+            ]);
+    }
+
+    if image is not loading properly , 
+
+    1) php artisan storage:link
+    2) go to .env change app url local host to http://127.0.0.1:8000
+
+    then we are going to our table section , we are already generate all the need table things using --generate method.. So we not making any changes in table Section .. 
+
+    we are only making changes in Actions just like we did in User Resourse 
+
+                ->actions([
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make()
+                    ])
+            ])
+
+CategoryResource was finished .. [DON'T FORGET TO IMPORT THINGS]
+
+Now we are going to create a BrandResourse
+
+ > php artisan make:filament-resource Brand --generate
+
+   goto form field , this form field is exactly same like a category form field , so copy and paste that form content here..
+
+   same field table like Category.. 
+
+   then copy the actions from Category and paste it.. 
+
+
+
+
 
