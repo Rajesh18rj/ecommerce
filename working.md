@@ -231,6 +231,18 @@ In this epi we are going to working on ProductResourse
             ])
 
  then asusual go to action section .. group them (edit, view , delete)  
+
+# 5 
+
+Today we are working on OrderResource
+
+php artisan make:filament-resource Customer --view
+
+generally it creates three files if we doesnt use view flag, if we use this tag we can get 4 files .. 
+
+  if you open the OrderResource Folder , you can see the 4th File ViewOrder , we didnt work that file now , we work on that later..
+
+Fill the Form what fields we want
  
           
 
