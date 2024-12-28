@@ -210,7 +210,29 @@ Now we are going to create a BrandResourse
 
    then copy the actions from Category and paste it.. 
 
+# 4 
 
+In this epi we are going to working on ProductResourse
+
+ php artisan make:filament-resource Product
+
+ goto form section , fill those fields 
+
+ then go to Table section , fill that what fields we want .. 
+
+ now goto filter section .. we want to filter by brand and category so 
+
+                ->filters([
+                SelectFilter::make('category')
+                    ->relationship('category', 'name'),
+
+                SelectFilter::make('brand')
+                    ->relationship('brand', 'name'),
+            ])
+
+ then asusual go to action section .. group them (edit, view , delete)  
+ 
+          
 
 
 
