@@ -286,4 +286,55 @@ go to OrderResource -> RelationManager -> AddressRelationManager
 
     Note : This address only relationship with this Order , if u open another order you cant see this address there .. 
 
+# 7 
 
+today we are working Order Tabs (Group of Order Tabs)
+
+go to ->filament -> Widgets
+
+$ php artisan make:filament-widget Orderstatus --resource=OrderResource
+
+goto ->OrderResource-> Widgets ->Orderstatus
+
+    protected function getStats(): array
+    {
+        return [
+            Stat::make('New Orders', Order::query()->where('status', 'new')->count()),
+        ];
+    }
+
+now go to Orders Page There is no card shown there , to fix that (show that card)
+
+    goto-> OrderResource->Pages->ListOrders     
+
+write this .. 
+
+        protected function getHeaderWidgets(): array {
+        return [
+            OrderStatus::class
+        ];
+    }
+
+Now go to Order Now that Card is showing .. 
+
+add this too in Orderstatus 
+
+Stat::make('Order Processing', Order::query()->where('status', 'processing')->count()),
+
+now we have 2 cards .. 
+
+add new 2 cards 
+
+Stat::make('Order Shipped', Order::query()->where('status', 'shipped')->count()),
+Stat::make('Average Price', Number::currency(Order::query()->avg('grand_total'), 'INR'))
+
+if we want to add these cards below the table 
+
+protected function getFooterWidgets(): array {
+        return [
+            OrderStatus::class
+        ];
+
+order status is completed ..
+
+lets move on to Tabs Group
