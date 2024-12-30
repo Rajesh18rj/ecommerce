@@ -244,6 +244,18 @@ generally it creates three files if we doesnt use view flag, if we use this tag 
 
 Fill the Form what fields we want
  
+ then asusual write actions 
+
+ finally if order is created , we want to indicate that , so 
+
+     public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null {
+        return static::getModel()::count() > 10  ? 'success' : 'danger';
+    }
           
 
 
