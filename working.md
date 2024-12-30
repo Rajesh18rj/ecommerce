@@ -350,3 +350,45 @@ goto -> ListOrders -> write this Tabs function
             'cancelled' => Tab::make()->query(fn($query) => $query->where('status', 'cancelled')),
         ];
     }
+
+# 8 
+
+How to work on OrderRelationManager with user
+ go to User Model there is no relation ship with Order make that one .. 
+
+     public function orders(){
+        return $this->hasMany(Order::class);
+    }
+
+now lets go to filament 
+  goto-> managing Relationship
+
+$ php artisan make:filament-relation-manager UserResource orders id
+UserResource->RelationManager->OrdersRelationManager
+
+ipo enaku user ah click panna (admin page la) athuku keelaiye antha user oda Orders show pannanum
+
+athuku munnadi UserResource la poi .. relation ah sollanum 
+
+        public static function getRelations(): array
+    {
+        return [
+            OrdersRelationManager::class
+        ];
+    }
+
+Now Lets back to OrderRelationManager
+
+we dont do form related things here , so remove the form content ..
+
+then goto Tables section fill that.. 
+
+then go to Action we dont need edit here , so remove it 
+
+            ->actions([
+                Action::make('View Order')
+                    ->url(fn(Order $record):string => OrderResource::getUrl('view', ['record'=> $record]))
+                    ->icon('heroicon-o-eye'),
+                Tables\Actions\DeleteAction::make(),
+            ])
+
