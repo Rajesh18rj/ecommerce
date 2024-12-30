@@ -257,6 +257,33 @@ Fill the Form what fields we want
         return static::getModel()::count() > 10  ? 'success' : 'danger';
     }
           
+# 6
 
+Intha epi la enna panna porom naa, address kum Order kum Relationship create panna porom.. 
+
+Already Order Model la pathom naa.. address ku function yeluthi irukom...
+
+go to filament -> Managing Relationships 
+
+     php artisan make:filament-relation-manager OrderResource address street_address
+
+go to OrderResource -> RelationManager -> AddressRelationManager
+
+    first go to -> OrderResource 
+
+     public static function getRelations(): array
+    {
+        return [
+            AddressRelationManager::class
+        ];
+    }
+
+    now save and go to browser , you can see the address column in below the edit order 
+
+    then comeback to AddressRelationManager
+
+    fill the Form and Table Field as usual .. 
+
+    Note : This address only relationship with this Order , if u open another order you cant see this address there .. 
 
 
