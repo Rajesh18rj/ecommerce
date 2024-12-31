@@ -457,3 +457,32 @@ If you would like to search across multiple columns of your resource, you may ov
     then do this in BrandResurce for 2 , Category 3 , Product 4 and OrderResource 5
 
     Now save and see the browser this navigations reordered .. 
+
+# 10 
+
+we are going to working on  user panel
+
+install tailwind css in your project 
+
+next we are going to preline.com
+
+Framework Guides -> Laravel ->
+> npm install preline // or yarn add preline
+set all the thing seeing docs
+
+
+then >npm run dev
+
+then install livewire 
+
+then we want layout file > php artisan livewire:layout
+
+add the livewireScripts and Styles , @vite in app.blade.css  
+
+then create livewire componenet
+
+>php artisan make:livewire HomePage
+(fill the blade and and the write the route for this seeing working or not)
+
+
+
