@@ -482,7 +482,140 @@ add the livewireScripts and Styles , @vite in app.blade.css
 then create livewire componenet
 
 >php artisan make:livewire HomePage
-(fill the blade and and the write the route for this seeing working or not)
+(fill the blade and  write the route for this seeing working or not)
+
+# 11
+
+before we developing a Homepage we are going to create footer and navbar
+
+first add home section codes .. hero, brand , categories , customer-review sections (using that GitHub code)
+
+then create a livewire class 
+
+> php artisan make:livewire CategoriesPage 
+
+then paste the categories-page(Github code) code in blade file 
+
+then going to create a route for categories
+Route::get('/categories',CategoriesPage::class);
+
+Now if you click Categories in Navbar its working .. it shows Categories 
+
+then Lets Fix that Products Page 
+
+> php artisan make:livewire ProductsPage
+
+paste the products-page(Github code) in ProductsPage blade file
+
+then go and create route for products 
+
+Route::get('/products', ProductsPage::class);
+
+Now reload and click the Products(in Navbar) its working.. 
+
+Again we are going to build(Every we add a new component we should build)
+
+Now its showing Beautifully.. 
+
+
+Now lets move on to Carts 
+  >php artisan make:livewire CartPage
+
+then create the route for this.. 
+
+and go to cart-page (Github) and paste that in blade file .. 
+
+Now click the Cart , its working .. (do the build)
+
+
+Next we are Working on ProductDetailPage 
+
+> php artisan make:livewire ProductDetailPage 
+
+make a route = Route::get('/products/{product}', ProductDetailPage::class);
+
+and then paste the product-detail-page (Github code) in our blade file
+
+click that its working .. 
+
+
+Now we are going to design on checkout page 
+
+>php artisan make:livewire CheckoutPage
+
+make a route =
+
+and then paste the checkout-page (Github) code in our blade file 
+
+lets visit this route http://127.0.0.1:8001/checkout its working
+
+
+Now we are going to design the MyOrdersPage
+
+>php artisan make:livewire MyOrdersPage
+
+and then paste the my-orders-page(Github) code in our blade file
+
+make a route: Route::get('/my-orders', MyOrdersPage::class);
+
+visit this route .. its working 
+
+
+Next we are working on MyOrderDetailPage
+
+and then paste order-detail-page.html code in our blade file 
+
+make a route : Route::get('/my-orders/{order}', MyOrderDetailPage::class);
+
+visit the route http://127.0.0.1:8001/my-orders/1 .. its working !
+
+
+
+
+
+Now Lets move on to authentication Page Login / Register / Forget Password / Reset Password
+
+> php artisan make:livewire auth.login-page
+> php artisan make:livewire auth.register-page
+>  php artisan make:livewire auth.forgot-password-page
+>  php artisan make:livewire auth.reset-password-page
+
+then paste the html code from Github for each blade file 
+
+then make a route
+
+Route::get('/login', LoginPage::class);
+Route::get('/register', RegisterPage::class);
+Route::get('/forgot', ForgotPasswordPage::class);
+Route::get('/reset', ResetPasswordPage::class);
+
+then check the login and etc .. all are working well 
+
+two more pages are left success and cancel page 
+
+lets do this
+
+> php artisan make:livewire SuccessPage
+
+> php artisan make:livewire CancelPage
+
+then paste the success and Cancel page codes from Github to this blade file 
+
+then make the routes
+
+Route::get('/success', SuccessPage::class);
+
+Route::get('/cancel', CancelPage::class);
+
+then check these pages .. in website it works perfectly
+
+
+
+
+
+
+
+
 
 
 
