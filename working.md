@@ -392,3 +392,68 @@ then go to Action we dont need edit here , so remove it
                 Tables\Actions\DeleteAction::make(),
             ])
 
+# 9
+
+Today we are working on Dashboard Page
+
+1) Display Latest latest order
+2) Display Order Statistics
+3) Implement Global Search on Admin Panel
+4) Reorder the Navigation Items
+
+goto ->filament ->panel builder -> dashboard ->on the right we can see table widgets
+
+php artisan make:filament-widget LatestOrders --table
+
+goto 
+Filament (Folder)-> Widgets -> LatestOrders
+lets do the table and action 
+
+then we changing the default visit page 
+
+goto -> Providers -> Filament -> AdminPanelProvider
+
+go to widgets section, comment the old one then Update this Orderstatus class there
+
+            ->widgets([
+                Orderstatus::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
+            ])
+
+
+now are going to do global search in admin panel
+
+goto filament -> Global Search
+
+     protected static ?string $recordTitleAttribute = 'name'; 
+
+     add this property in UserResource
+
+now try search .. its shows the result of user name .. 
+
+we can also do with BrandResource .. Paste that property in BrandResource .. then we search by Brand Name
+
+if we want to search with multiple columns..    
+
+    Globally searching across multiple columns
+If you would like to search across multiple columns of your resource, you may override the getGloballySearchableAttributes() method. "Dot notation" allows you to search inside relationships:
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }  (add this in UserResource)
+
+    now we are going to re-arrange the navigation items 
+
+    goto -> filament -> Navigation
+
+    Sorting Navigation Items 
+
+    first go to UserResource 
+
+    protected static ?int $navigationSort = 1; (first we want to show User so we give the value of 1)
+
+    then do this in BrandResurce for 2 , Category 3 , Product 4 and OrderResource 5
+
+    Now save and see the browser this navigations reordered .. 
