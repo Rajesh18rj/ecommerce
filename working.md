@@ -689,6 +689,17 @@ we finished all filters in left side of the Products .. then we working on some 
 
 everything works good 
 
+# 16 
+
+Today we are working on cart management system
+
+create -> Helpers folder in App directory then create a CartManagement.php
+
+we are going to write all the CartManagement Helper Functions here 
+
+.. 
+
+yeah we write all function in this helper class.. we can reuse this whenever we want , we are going to use these helper methods in next episode 
 
 
 
