@@ -656,6 +656,29 @@ also do that in categories
 
 next go to CategoriesPage do just like this .. 
 
+# 14
+
+today we are doing Products Page dynamic
+
+before that mobile view la use pannum pothu hamburgder symbol ah click panna onnum aagala.. 
+this becoz we used wire:navigate method
+
+lets fix this 
+
+document.addEventListener('livewire:navigated', () => {
+window.HSStaticMethods.autoInit();
+})  
+
+paste this code in app.js .. now its working perfectly
+
+now lets go to ProductsPage-> work that
+
+after finished this , lets jump-in to ProductDetailPage
+
+when we click the product that slug is working perfectly but that Details are in static , lets fix this 
+
+all done for product detail page too
+
 
 
 
