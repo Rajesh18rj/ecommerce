@@ -609,8 +609,34 @@ Route::get('/cancel', CancelPage::class);
 
 then check these pages .. in website it works perfectly
 
+# 12
 
+today we are working on active link and wire navigate of livewire 3
 
+active link 
+
+    ipo namma home paga la irukom naa.. home page mattum highlight pannanum apdi nu nenacha 
+
+    {{ request()->is('/') ? 'text-blue-600' : 'text-gray-500' }}
+
+    similarly for categories 
+
+    {{ request()->is('categories') ? 'text-blue-600' : 'text-gray-500' }}
+
+similary do with products and cart
+
+wire navigation 
+
+    ipo naan oru page la irunthu innoru page poren naa , whole page um reload aagitu than next page pogum , it takes some time.
+itha avoid panna than wire navigation ah use panna porom
+
+so go to -> navbar.blade.php
+
+add this wire:navigate  in all inside the the anchor tag.. now try to click the home or categories or product .. its working without re-loading 
+
+(actually its reloading in backend livewire did this in backend , so this isnt reloading )
+
+do this in login and register page tooo.. (in anchor tag)
 
 
 
