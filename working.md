@@ -638,7 +638,23 @@ add this wire:navigate  in all inside the the anchor tag.. now try to click the 
 
 do this in login and register page tooo.. (in anchor tag)
 
+# 13 
 
+today we are going to do home and categories page dynamic
+
+first uh Home page la iruka brands and categories ah dynamic ah mathuvom.. 
+
+lets go to homepage component
+
+$brands = Brand::where('is_active',1)->get();  //we are only getting active brands so that why is_active 1, it doesnt get the inactive brands
+
+loop this in blade file 
+
+also do that in categories 
+
+...
+
+next go to CategoriesPage do just like this .. 
 
 
 
