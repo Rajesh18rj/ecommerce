@@ -679,6 +679,17 @@ when we click the product that slug is working perfectly but that Details are in
 
 all done for product detail page too
 
+# 15 
+
+today we are going to working on Product - filter (on the left side)
+
+ what we do is if i selected any (checkbox) that things only i want to show
+
+we finished all filters in left side of the Products .. then we working on some filters in home and categories 
+
+everything works good 
+
+
 
 
 
