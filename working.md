@@ -573,6 +573,7 @@ visit the route http://127.0.0.1:8001/my-orders/1 .. its working !
 
 
 
+
 Now Lets move on to authentication Page Login / Register / Forget Password / Reset Password
 
 > php artisan make:livewire auth.login-page
@@ -748,5 +749,13 @@ so go to addToCart function..
     now try to add cart its working perfectly.. 
 
     Next we are going to working on ProductDetailPage ->add cart
+
+there we have - and + .. we write the function for this and make a wire click in blade file 
+
+next we are working on ProductDetailPage Add to Cart Button
+
+we can also did this addToCart function in ProductPage copy and paste it here too
+
+now all working perfectly.. 
 
 
