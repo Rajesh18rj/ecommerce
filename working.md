@@ -758,4 +758,10 @@ we can also did this addToCart function in ProductPage copy and paste it here to
 
 now all working perfectly.. 
 
+# 18 
+
+today we are working on Cart Page
+
+COMPLETED.. 
+
 

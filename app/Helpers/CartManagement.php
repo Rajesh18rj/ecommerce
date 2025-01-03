@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Cookie;
 use App\Models\Product;
 
 class CartManagement {
-    // add item to cart
-    static public function addItemToCart($product_id){
+    // add item to cart with qty
+    static public function addItemToCartWithQty($product_id, $qty = 1 ){
         $cart_items = self::getCartItemsFromCookie();
 
         $existing_item = null;
@@ -31,7 +31,7 @@ class CartManagement {
                     'product_id' => $product_id,
                     'name' => $product->name,
                     'image' => $product->images[0],
-                    'quantity' => 1,
+                    'quantity' => $qty,
                     'unit_amount' => $product->price,
                 ];
             }
@@ -81,7 +81,7 @@ class CartManagement {
 
         foreach($cart_items as $key => $item){
             if($item['product_id'] == $product_id) {
-                $cart_items[$key]['quantity']++;
+                $cart_items[$key]['quantity'] = $qty;
                 $cart_item[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]
                 ['unit_amount'];
             }
