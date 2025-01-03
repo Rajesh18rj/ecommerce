@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -9,11 +10,14 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
 #[Title('Products - RJ Webshop')]
 class ProductsPage extends Component
 {
+    use LivewireAlert;
+
     use WithPagination;
 
     #[Url]
@@ -33,6 +37,19 @@ class ProductsPage extends Component
 
     #[Url]
     public $sort = 'latest';
+
+    // add product to cart method
+    public function addToCart($product_id){
+        $total_count = CartManagement::addItemToCart($product_id);
+
+        $this->dispatch('update-cart-count', total_count : $total_count);
+
+        $this->alert('success', 'Product added to the cart successfully..', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+        ]);
+    }
 
 
     public function render()

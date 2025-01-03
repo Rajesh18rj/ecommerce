@@ -702,7 +702,51 @@ we are going to write all the CartManagement Helper Functions here
 yeah we write all function in this helper class.. we can reuse this whenever we want , we are going to use these helper methods in next episode 
 
 
+# 17 
 
+previously we are creating Helper methods for CartManagement we are going us this
 
+first go to ProductsPage workon Add to cart button and it functions using helper method
+
+then working on Navbar that cart items count make dynamically 
+
+then we are going to do sweet alert so lets go https://github.com/jantinnerezo/livewire-alert
+
+follow the instructions 
+
+> composer require jantinnerezo/livewire-alert
+
+then use this cdn and script in layout file 
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <x-livewire-alert::scripts />
+
+try the demo in that github page 
+
+so , intha Sweet alert namaku epo kaatanum naa , cart la add pannathuku aprom so
+
+so go to addToCart function.. 
+
+    // add product to cart method
+    public function addToCart($product_id){
+        $total_count = CartManagement::addItemToCart($product_id);
+
+        $this->dispatch('update-cart-count', total_count : $total_count);
+
+        $this->alert('success', 'Product added to the cart successfully..', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+        ]);
+    }
+
+    dont forget to use -> use LivewireAlert;
+
+    then make sure to import this class
+
+    now try to add cart its working perfectly.. 
+
+    Next we are going to working on ProductDetailPage ->add cart
 
 
