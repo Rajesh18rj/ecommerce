@@ -33,6 +33,8 @@ class CartManagement {
                     'image' => $product->images[0],
                     'quantity' => 1,
                     'unit_amount' => $product->price,
+                    'total_amount' => 1 * $product->price,
+
                 ];
             }
         }
@@ -68,6 +70,8 @@ class CartManagement {
                     'image' => $product->images[0],
                     'quantity' => $qty,
                     'unit_amount' => $product->price,
+                    'total_amount' => $qty * $product->price,
+
                 ];
             }
         }
@@ -115,13 +119,13 @@ class CartManagement {
     static public function incrementQuantityToCartItem($product_id){
         $cart_items = self::getCartItemsFromCookie();
 
-        foreach($cart_items as $key => $item){
-            if($item['product_id'] == $product_id) {
-                $cart_items[$key]['quantity'] = $qty;
-                $cart_item[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]
-                ['unit_amount'];
+        foreach ($cart_items as $key => $item) {
+            if ($item['product_id'] == $product_id) {
+                $cart_items[$key]['quantity']++;
+                $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
             }
         }
+
         self::addCartItemsToCookie($cart_items);
         return $cart_items;
     }
@@ -131,15 +135,15 @@ class CartManagement {
     static public function decrementQuantityToCartItem($product_id){
         $cart_items = self::getCartItemsFromCookie();
 
-        foreach($cart_items as $key => $item){
-            if($item['product_id'] == $product_id){
-                if($cart_items[$key]['quantity'] > 1){
+        foreach ($cart_items as $key => $item) {
+            if ($item['product_id'] == $product_id) {
+                if ($cart_items[$key]['quantity'] > 1) {
                     $cart_items[$key]['quantity']--;
-                    $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]
-                    ['unit_amount'];
+                    $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
                 }
             }
         }
+
         self::addCartItemsToCookie($cart_items);
 
         return $cart_items;
