@@ -571,9 +571,6 @@ visit the route http://127.0.0.1:8001/my-orders/1 .. its working !
 
 
 
-
-
-
 Now Lets move on to authentication Page Login / Register / Forget Password / Reset Password
 
 > php artisan make:livewire auth.login-page
@@ -763,5 +760,7 @@ now all working perfectly..
 today we are working on Cart Page
 
 COMPLETED.. 
+
+# 19
 
 

@@ -34,7 +34,11 @@
                                         <button wire:click="increaseQty({{ $item['product_id'] }})" class="px-4 py-2 ml-2 border rounded-md">+</button>
                                     </div>
                                 </td>
-                                <td class="py-4">{{ Number::currency($grand_total, 'INR') }}</td>
+
+                                <td class="py-4">
+                                    {{ Number::currency($item['total_amount'], 'INR') }}
+                                </td>
+
                                 <td>
                                     <button wire:click="removeItem({{ $item['product_id'] }})" class="px-3 py-1 border-2 rounded-lg bg-slate-300 border-slate-400 hover:bg-red-500 hover:text-white hover:border-red-700">
                                     <span wire:loading.remove wire:target="removeItem({{ $item['product_id'] }})" >Remove</span>
