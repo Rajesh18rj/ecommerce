@@ -761,6 +761,116 @@ today we are working on Cart Page
 
 COMPLETED.. 
 
-# 19
+# 19 
+
+today we are going to working on user authentication system
+
+goto Register Page blade file , assign the name , email and password to wire:model and 
+also form tag and give save function there
+
+then come to class file
+public $name;
+public $email;
+public $password;
+
+    // Register User
+    public function save(){
+        $this->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|max:255',
+        ]);
+
+        // save to database
+        $user = User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+        ]);
+
+        //Once User is store in database , we need to login
+
+        // login user
+        auth()->login($user);
+
+        // redirect to the Home Page
+        return redirect()->intended();
+
+then go to blade file and update error message 
+
+now try to signin it stores the user in database
+
+after we login we should not see the login button in the navbar
+
+Route la ithellam group panni authentication user ah iruntha mattum intha route lam show pannanum nu solrom
+
+    Route::middleware('auth')->group(function () {
+    Route::get('logout', function (){
+    auth()->logout();
+    return redirect('/');
+    });
+    
+        Route::get('/checkout', CheckoutPage::class);
+        Route::get('/my-orders', MyOrdersPage::class);
+        Route::get('/my-orders/{order}', MyOrderDetailPage::class);
+        Route::get('/success', SuccessPage::class);
+        Route::get('/cancel', CancelPage::class);
+    });
+
+athey mari guest ku intha route laam show pannanum nu solrom
+
+    Route::middleware('guest')->group(function () {
+    Route::get('/login', LoginPage::class);
+    Route::get('/register', RegisterPage::class);
+    Route::get('/forgot', ForgotPasswordPage::class);
+    Route::get('/reset', ResetPasswordPage::class);
+    });
+
+go to navbar.blade
+
+cut dropdown menu into inside of this
+
+@auth
+@endauth
+
+and then cut and paste the Login Section into 
+
+@guest
+@endguest
+
+then change the user name dynamically using ->   {{ auth()->user()->name }}
+
+then go to logout section  , go to href pass the logout route there
+
+now try to logout , its working perfectly..
+
+Now lets working on signin page 
+
+goto login-page blade file 
+
+give wire model to form tag , email, password 
+
+then comeback to class file 
+
+
+    public $email;
+    public $password;
+
+    public function save() {
+        $this->validate([
+            'email' => 'required|email|max:255|exists:users,email',
+            'password' => 'required|min:6|max:255',
+        ]);
+
+        if(!auth()->attempt(['email' => $this->email, 'password' => $this->password])) {
+            session()->flash('error', 'Invalid Credentials');
+            return;
+        }
+
+        return redirect()->intended();
+
+write this .. 
+
+its working very well ... 
 
 
