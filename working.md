@@ -873,4 +873,121 @@ write this ..
 
 its working very well ... 
 
+# 20
+
+today we are working on forget password and reset password
+
+goto ForgotPasswordPage
+
+go to  its blade file give the wire:model and wire:submit for form and email 
+
+then back to class file 
+
+
+    public $email;
+
+    public function save(){
+        $this->validate([
+            'email' => 'required|email|exists:users,email|max:255'
+        ]);
+
+        $status = Password::sendResetLink([
+            'email' => $this->email,
+        ]);
+
+        if($status === Password::RESET_LINK_SENT){
+            session()->flash('success', 'Password reset link has been sent to your email.');
+            $this->email = '';
+        }
+    }
+
+then back to blade file and write the error message for forgot password
+
+.. this works fine 
+
+now we want to send the mail for forgot password and reset it 
+
+we want to set the mail in .env file [Mailer section]
+
+first go to mail trap
+
+# Looking to send emails in production? Check out our Email API/SMTP product!
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=80fe1fda46d9ab
+MAIL_PASSWORD=cffeac8ade5e4d     copy this from mailtrap
+
+paste it in mailer section in .env
+
+change the route name like this ..     Route::get('/reset/{token}', ResetPasswordPage::class)->name('password.reset');
+
+then enter the email now press reset password button.. check the mail trap there is a mail here 
+
+but here is any confirmation message shown here , so lets fix it 
+
+write the code for this is in blade file .. 
+
+
+now lets go to mailtrap , open the mail Press the Reset Password button .. it will be redirect to the Reset Password Page
+
+forgot password page things are finished , now lets move on to Reset Password Page
+
+go to its blade file define wire:submit in form tag and wire:model in Password and Confirm Password
+
+the go to class file 
+
+    $public $token;
+
+    #[Url]
+    public $email;
+    public $password;
+    public $password_confirmation;
+
+    public function mount($token){
+        $this->token = $token;
+    }
+
+    public function save(){
+        $this->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $status = Password::reset(
+            [
+                'email' => $this->email,
+                'password' => $this->password,
+                'password_confirmation' => $this->password_confirmation,
+                'token' => $this->token,
+            ],
+            function (User $user, string $password) {
+                $password = $this->password;
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+                $user->save();
+                event(new PasswordReset($user));
+            }
+        );
+        return $status === Password::PASSWORD_RESET ? redirect('/login') : session()->flash('error', 'Something went wrong');
+    }
+
+write error message in blade file 
+
+now try  to reset the password type Password and Confirm Password
+
+Now try to login that changed password in login page , its successfully logged in
+
+lets show the flash message 
+
+write the code for that.. 
+
+that's it .. 
+
+
+
+
+
 
