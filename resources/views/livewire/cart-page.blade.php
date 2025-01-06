@@ -18,7 +18,7 @@
 
                         @forelse ($cart_items as $item)
 
-                        {{-- @dd($item) --}}
+{{--                         @dd($item)--}}
                             <tr wire:key="{{ $item['product_id'] }}">
                                 <td class="py-4">
                                     <div class="flex items-center">
