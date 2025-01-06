@@ -986,6 +986,75 @@ write the code for that..
 
 that's it .. 
 
+# 21 today we are going to working on checkout page
+
+before that , if we go to admin panel with other user , they can access it , its bad. admin should only can access the admin page
+
+go to filament , Panel Builder -> Allowing users to access a panel
+
+go to User Model 
+
+    class User extends Authenticatable implements FilamentUser -> use this in class file 
+
+and create this function
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->email == 'admin@gmail.com';          -> i want this user only can access the admin panel 
+    }
+
+if i try access admin panel from different user , it shows 403 error
+
+ok lets moveon to checkout page
+
+        public function render()
+    {
+        $cart_items = CartManagement::getCartItemsFromCookie();
+        $grand_total = CartManagement::calculateGrandTotal($cart_items);
+        return view('livewire.checkout-page', [
+            'cart_items' => $cart_items,
+            'grand_total' => $grand_total
+        ]);
+    }
+
+first we are going to working on Order Summary Section
+
+we are completed Order Summary and Basket Summary 
+
+now lets move on to shipping address
+
+ lets go to class file 
+
+        public $first_name;
+    public $last_name;
+    public $phone;
+    public $street_address;
+    public $city;
+    public $state;
+
+    public $zip_code;
+    public $payment_method;
+
+    public function placeOrder(){
+        $this->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone' => 'required',
+            'street_address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip_code' => 'required',
+            'payment_method' => 'required',
+        ]);
+    }
+
+according to this write the blade file. and error message .. 
+
+next epi we are going to write for the PlaceOrder Functionality.. 
+
+
+
+
 
 
 
