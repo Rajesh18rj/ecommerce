@@ -1078,6 +1078,15 @@ search stripe sdk in google , you can see the github page
 
 Lets working on placeOrder Method 
 
+complete the placeOrder method .. 
+
+now goto Place Order in web , fill the form now try to pay with stripe (using dummy data)
+
+it successfully redirect to the success page , then saw the url you can also get the session id
+(we can modify this success page in next epi)
+
+
+
 
 
 

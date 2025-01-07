@@ -1,20 +1,20 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
-    <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+    <h1 class="mb-4 text-2xl font-bold text-gray-800 dark:text-white">
         Checkout
     </h1>
     <form wire:submit.prevent="placeOrder">
         <div class="grid grid-cols-12 gap-4">
-            <div class="md:col-span-12 lg:col-span-8 col-span-12">
+            <div class="col-span-12 md:col-span-12 lg:col-span-8">
                 <!-- Card -->
-                <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+                <div class="p-4 bg-white shadow rounded-xl sm:p-7 dark:bg-slate-900">
                     <!-- Shipping Address -->
                     <div class="mb-6">
-                        <h2 class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+                        <h2 class="mb-2 text-xl font-bold text-gray-700 underline dark:text-white">
                             Shipping Address
                         </h2>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="first_name">
+                                <label class="block mb-1 text-gray-700 dark:text-white" for="first_name">
                                     First Name
                                 </label>
 
@@ -26,12 +26,12 @@
                                 </input>
 
                                 @error('first_name')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                                    <div class="text-sm text-red-500">{{ $message }}</div>
                                 @enderror
 
                             </div>
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="last_name">
+                                <label class="block mb-1 text-gray-700 dark:text-white" for="last_name">
                                     Last Name
                                 </label>
                                 <input wire:model="last_name"
@@ -42,13 +42,13 @@
                                 </input>
 
                                 @error('last_name')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                                <div class="text-sm text-red-500">{{ $message }}</div>
                                 @enderror
 
                             </div>
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="phone">
+                            <label class="block mb-1 text-gray-700 dark:text-white" for="phone">
                                 Phone
                             </label>
                             <input wire:model="phone"
@@ -59,12 +59,12 @@
                             </input>
 
                             @error('phone')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                            <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
 
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="address">
+                            <label class="block mb-1 text-gray-700 dark:text-white" for="address">
                                 Address
                             </label>
 
@@ -76,30 +76,30 @@
                             </input>
 
                             @error('street_address')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                            <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
 
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="city">
+                            <label class="block mb-1 text-gray-700 dark:text-white" for="city">
                                 City
                             </label>
 
                             <input wire:model="city"
                                    class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none
-                                   @error('street_address') border-red-500 @enderror    "
+                                   @error('city') border-red-500 @enderror    "
                                    id="city"
                                    type="text">
                             </input>
 
                             @error('city')
-                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                            <div class="text-sm text-red-500">{{ $message }}</div>
                             @enderror
 
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-4">
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="state">
+                                <label class="block mb-1 text-gray-700 dark:text-white" for="state">
                                     State
                                 </label>
                                 <input wire:model="state"
@@ -110,12 +110,12 @@
                                 </input>
 
                                 @error('state')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                                <div class="text-sm text-red-500">{{ $message }}</div>
                                 @enderror
 
                             </div>
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="zip">
+                                <label class="block mb-1 text-gray-700 dark:text-white" for="zip">
                                     ZIP Code
                                 </label>
                                 <input  wire:model="zip_code"
@@ -126,13 +126,13 @@
                                 </input>
 
                                 @error('zip_code')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                                <div class="text-sm text-red-500">{{ $message }}</div>
                                 @enderror
 
                             </div>
                         </div>
                     </div>
-                    <div class="text-lg font-semibold mb-4">
+                    <div class="mb-4 text-lg font-semibold">
                         Select Payment Method
                     </div>
                     <ul class="grid w-full gap-6 md:grid-cols-2">
@@ -179,15 +179,15 @@
                     </ul>
 
                     @error('payment_method')
-                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                        <div class="text-sm text-red-500">{{ $message }}</div>
                     @enderror
 
                 </div>
                 <!-- End Card -->
             </div>
-            <div class="md:col-span-12 lg:col-span-4 col-span-12">
-                <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-                    <div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+            <div class="col-span-12 md:col-span-12 lg:col-span-4">
+                <div class="p-4 bg-white shadow rounded-xl sm:p-7 dark:bg-slate-900">
+                    <div class="mb-2 text-xl font-bold text-gray-700 underline dark:text-white">
                         ORDER SUMMARY
                     </div>
                     <div class="flex justify-between mb-2 font-bold">
@@ -214,7 +214,7 @@
 						{{ Number::currency(0, 'INR') }}
 					</span>
                     </div>
-                    <hr class="bg-slate-400 my-4 h-1 rounded">
+                    <hr class="h-1 my-4 rounded bg-slate-400">
                     <div class="flex justify-between mb-2 font-bold">
 					<span>
 						Grand Total
@@ -225,16 +225,17 @@
                     </div>
                     </hr>
                 </div>
-                <button type="submit" class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
+                <button type="submit" class="w-full p-3 mt-4 text-lg text-white bg-green-500 rounded-lg hover:bg-green-600">
                     Place Order
                 </button>
-                <div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-                    <div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+                <div class="p-4 mt-4 bg-white shadow rounded-xl sm:p-7 dark:bg-slate-900">
+                    <div class="mb-2 text-xl font-bold text-gray-700 underline dark:text-white">
                         BASKET SUMMARY
                     </div>
                     <ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
 
                         @foreach($cart_items as $ci)
+
                             <li class="py-3 sm:py-4" wire:key="{{ $ci['product_id'] }}">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">

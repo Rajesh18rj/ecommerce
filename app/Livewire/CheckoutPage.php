@@ -24,6 +24,15 @@ class CheckoutPage extends Component
     public $zip_code;
     public $payment_method;
 
+    public function mount() {
+        // if cart items is 0 , then someone access checkout page from url , we should block them , so
+        $cart_items = CartManagement::getCartItemsFromCookie();
+        if($cart_items == 0) {
+            return redirect('/products');
+        }
+
+    }
+
     public function placeOrder(){
 
 //        dd($this->payment_method);
@@ -48,7 +57,7 @@ class CheckoutPage extends Component
         foreach($cart_items as $item){
             $line_items[]=[
                 'price_data' => [
-                    'currency' => 'INR',
+                    'currency' => 'inr',
                     'unit_amount' => $item['unit_amount'] * 100,
                     'product_data' => [
                         'name' => $item['name'],
@@ -67,7 +76,7 @@ class CheckoutPage extends Component
         $order->currency = 'inr';
         $order->shipping_amount = 0;
         $order->shipping_method = 'none';
-        $order->notes = 'Order placed by '.auth()->user()->name;
+        $order->notes = 'Order placed by ' . auth()->user()->name;
 
         $address = new Address();
         $address->first_name = $this->first_name;
@@ -101,9 +110,29 @@ class CheckoutPage extends Component
          $order->save();
          $address->order_id = $order->id;
          $address->save();
-         $order->items()->createMany($cart_items);
-         CartManagement::clearCartItems();
-         return redirect($redirect_url);
+
+
+        //  $order->items()->createMany($cart_items);
+        //  CartManagement::clearCartItems();
+        //  return redirect($redirect_url);
+
+         // Filter cart items to remove 'name' before saving
+    $filtered_cart_items = array_map(function ($item) {
+        return [
+            'product_id' => $item['product_id'],
+            'quantity' => $item['quantity'],
+            'unit_amount' => $item['unit_amount'],
+            'total_amount' => $item['total_amount'],
+            // Exclude 'name' from the database insertion
+        ];
+    }, $cart_items);
+
+    // Save the order items
+    $order->items()->createMany($filtered_cart_items);
+
+    // Clear cart items and redirect
+    CartManagement::clearCartItems();
+    return redirect($redirect_url);
     }
 
     public function render()
@@ -112,7 +141,7 @@ class CheckoutPage extends Component
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
         return view('livewire.checkout-page', [
             'cart_items' => $cart_items,
-            'grand_total' => $grand_total
+            'grand_total' => $grand_total,
         ]);
     }
 }
