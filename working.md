@@ -1062,11 +1062,13 @@ goto dashboard.stripe webpage
 
 enable -> test mode
 
-Develoopers -> Api -> Secret Key (Copy that secret key)
+Developers -> Api -> Secret Key (Copy that secret key)
 
 open .env file -> paste the key in STRIPE_SECRET
 
 STRIPE_SECRET = sk_test_51QeSM5HhP3h1h3njWBJ7UW6ih4EcFou8IrJgjx6ZGutpshuH1MFs4DjCxtESNI6ax5cDmGCxoi0RaAAdZoQYlWeZ00J342YBGk
+
+stripe pw - Rajeshrj18k@
 
 next we need to install stripe php sdk
 
