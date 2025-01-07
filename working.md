@@ -1052,10 +1052,29 @@ according to this write the blade file. and error message ..
 
 next epi we are going to write for the PlaceOrder Functionality.. 
 
+# 22
 
+lets working on shipping address form
 
+we will also see how to use stripe
 
+goto dashboard.stripe webpage
 
+enable -> test mode
+
+Develoopers -> Api -> Secret Key (Copy that secret key)
+
+open .env file -> paste the key in STRIPE_SECRET
+
+STRIPE_SECRET = sk_test_51QeSM5HhP3h1h3njWBJ7UW6ih4EcFou8IrJgjx6ZGutpshuH1MFs4DjCxtESNI6ax5cDmGCxoi0RaAAdZoQYlWeZ00J342YBGk
+
+next we need to install stripe php sdk
+
+search stripe sdk in google , you can see the github page 
+
+> composer require stripe/stripe-php
+
+Lets working on placeOrder Method 
 
 
 
