@@ -1085,8 +1085,76 @@ now goto Place Order in web , fill the form now try to pay with stripe (using du
 it successfully redirect to the success page , then saw the url you can also get the session id
 (we can modify this success page in next epi)
 
+# 23
 
+today we are going to see , how to send email to customer after order , and then make a success page dynamic
 
+lets start with a mail first
+
+go to laravel docs -> search mail
+
+go for Markdown Mailables
+
+> php artisan make:mail OrderShipped --markdown=mail.orders.shipped
+
+change that to this
+
+>$ php artisan make:mail OrderPlaced --markdown=mail.orders.placed
+
+it will created two files one in app folder another one is in resources/views directory
+
+go to class file 
+
+assign this public property,
+    public $order;
+
+then go to construct method
+
+    public function __construct($order)
+    {
+        $this->order = $order;
+    }
+
+then go to content method
+
+    public function content(): Content
+    {
+        return new Content(
+            markdown: 'mail.orders.placed',
+            with: [
+                'url' => route('my-orders.show', $this->order),
+            ]
+        );
+    }
+
+pass the url like this .. we define this url name in routes
+
+then go to its blade file , write this 
+
+    <x-mail::message>
+    # Order Placed successfully
+    
+        #Thank you for your order. Your Order number is: {{ $order->id  }}.
+    
+    <x-mail::button :url="'$url'">
+    View Order
+    </x-mail::button>
+    
+    Thanks,<br>
+    {{ config('app.name') }}
+    </x-mail::message>
+
+go to CheckoutPage
+
+        Mail::to(request()->user())->send(new OrderPlaced($order)); //we creating this OrderPlaced class in Mail Directory
+add this before redirect to the url
+
+make sure import that OrderPlaced .. 
+
+now lets try to place order in web site , fill up fields and this time select cash on delivery , then click placeorder 
+
+its working , go to mail trap and checked it that order confirmation is received or not .. its received .. 
+if you click that view order in mail its redirect to the Order details page
 
 
 

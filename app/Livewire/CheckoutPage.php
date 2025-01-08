@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Order;
@@ -33,7 +35,8 @@ class CheckoutPage extends Component
 
     }
 
-    public function placeOrder(){
+    public function placeOrder()
+    {
 
 //        dd($this->payment_method);
 
@@ -54,16 +57,16 @@ class CheckoutPage extends Component
 
         $line_items = [];
 
-        foreach($cart_items as $item){
-            $line_items[]=[
+        foreach ($cart_items as $item) {
+            $line_items[] = [
                 'price_data' => [
                     'currency' => 'inr',
                     'unit_amount' => $item['unit_amount'] * 100,
                     'product_data' => [
                         'name' => $item['name'],
-                        ]
-                    ],
-                    'quantity' => $item['quantity'],
+                    ]
+                ],
+                'quantity' => $item['quantity'],
             ];
         }
 
@@ -89,7 +92,7 @@ class CheckoutPage extends Component
 
         $redirect_url = '';
 
-        if($this->payment_method == 'stripe'){
+        if ($this->payment_method == 'stripe') {
             Stripe::setApiKey(env('STRIPE_SECRET'));
             $sessionCheckout = Session::create([
                 'payment_method_types' => ['card'],
@@ -101,20 +104,19 @@ class CheckoutPage extends Component
             ]);
 
             $redirect_url = $sessionCheckout->url;
-        }
-         else
-         {
+        } else {
             $redirect_url = route('success');
 
-            }
-         $order->save();
-         $address->order_id = $order->id;
-         $address->save();
+        }
+        $order->save();
+        $address->order_id = $order->id;
+        $address->save();
 
 
-        //  $order->items()->createMany($cart_items);
-        //  CartManagement::clearCartItems();
-        //  return redirect($redirect_url);
+//        $order->items()->createMany($cart_items);
+//        CartManagement::clearCartItems();
+//        Mail::to(request()->user())->send(new OrderPlaced($order)); //we creating this OrderPlaced class in Mail Directory
+//        return redirect($redirect_url);
 
          // Filter cart items to remove 'name' before saving
     $filtered_cart_items = array_map(function ($item) {
@@ -132,9 +134,10 @@ class CheckoutPage extends Component
 
     // Clear cart items and redirect
     CartManagement::clearCartItems();
+    Mail::to(request()->user())->send(new OrderPlaced($order)); //we creating this OrderPlaced class in Mail Directory
     return redirect($redirect_url);
+//    }
     }
-
     public function render()
     {
         $cart_items = CartManagement::getCartItemsFromCookie();
