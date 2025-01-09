@@ -1160,6 +1160,19 @@ now we are going to make success page dynamic
 
 we successfully make that success page dynamic
 
+# 24 
+
+in this epi we are going to see how to make My Orders page dynamic
+
+goto -> navbar.blade.php 
+
+go to My Orders section edit that , 
+
+after that click the my orders , this page is static now we are going to make it dynamic
+we make it dyanamic .. 
+
+now we are going to give colors for order status and payment status .. 
+this also completed.. 
 
 
 
