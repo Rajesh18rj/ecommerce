@@ -148,3 +148,4 @@ class CheckoutPage extends Component
         ]);
     }
 }
+

@@ -1158,6 +1158,10 @@ if you click that view order in mail its redirect to the Order details page
 
 now we are going to make success page dynamic 
 
+we successfully make that success page dynamic
+
+
+
 
 
 

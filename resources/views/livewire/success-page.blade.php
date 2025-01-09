@@ -12,12 +12,12 @@
 
                                     {{-- @dd($order->address->full_name) --}}
 
-                                    {{ $order->address->full_name }}</p>
+                                    {{ $order->address->first_name }} {{ $order->address->last_name }}</p>
                                 <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">
                                     {{ $order->address->street_address }}
                                 </p>
                                 <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">
-                                    {{ $order->address->city }}, {{ $order->address->city }}, {{ $order->address->zip_code }}
+                                    {{ $order->address->city }}, {{ $order->address->state }}, {{ $order->address->zip_code }}
                                 </p>
                                 <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">
                                     Phone: {{ $order->address->phone }}
