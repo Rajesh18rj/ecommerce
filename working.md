@@ -1174,6 +1174,20 @@ we make it dyanamic ..
 now we are going to give colors for order status and payment status .. 
 this also completed.. 
 
+# 25 
+
+today we are going to working on MyOrderDetail page , we are going to make it dynamic
+
+go to MyOrderDetailPage blade and class file .. 
+
+lets finished it 
+
+and then give colors for order status and payment status juz like we did before in MyOrder Page 
+
+yeah that's it .. 
+
+we finished it 
+
 
 
 

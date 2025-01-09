@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
@@ -13,6 +14,7 @@ class OrderItem extends Model
     use HasFactory;
 
     protected $guarded =[];
+
 
     // This Order Item Belongs to order
 
@@ -25,4 +27,6 @@ class OrderItem extends Model
     public function product(){
         return $this->belongsTo(Product::class);
     }
+
+
 }
