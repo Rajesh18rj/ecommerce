@@ -1156,5 +1156,8 @@ now lets try to place order in web site , fill up fields and this time select ca
 its working , go to mail trap and checked it that order confirmation is received or not .. its received .. 
 if you click that view order in mail its redirect to the Order details page
 
+now we are going to make success page dynamic 
+
+
 
 
